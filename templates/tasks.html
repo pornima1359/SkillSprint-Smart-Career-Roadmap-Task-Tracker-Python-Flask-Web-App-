@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tasks - SkillSprint</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="topbar">
+  <a class="btn" href="/dashboard">⬅ Dashboard</a>
+  <a class="btn" href="/logout">Logout</a>
+</div>
+
+<div class="container">
+  <h1>✅ Tasks</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert {{category}}">{{message}}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" class="card">
+    <input type="date" name="date" required>
+    <input type="text" name="task" placeholder="Enter your task..." required>
+    <button class="btn full" type="submit">Add Task</button>
+  </form>
+
+  <div class="card">
+    {% for t in tasks %}
+      <div class="row">
+        <div>
+          <b>{{t[1]}}</b> - {{t[2]}}
+          {% if t[3] == 1 %}
+            <span class="status Done">Done</span>
+          {% else %}
+            <span class="status Pending">Pending</span>
+          {% endif %}
+        </div>
+        <a class="btn small" href="/task-toggle/{{t[0]}}">Toggle</a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+</body>
+</html>
