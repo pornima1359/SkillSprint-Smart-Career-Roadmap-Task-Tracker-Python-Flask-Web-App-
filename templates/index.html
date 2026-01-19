@@ -4,17 +4,118 @@
   <title>SkillSprint</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-  <div class="container">
-    <h1>🚀 SkillSprint</h1>
-    <h3>Page Loaded ✅</h3>
-
-    <p>Smart Career Roadmap + Tasks + Progress Tracker</p>
-
-    <div class="btn-group">
+  <!-- Top Bar -->
+  <div class="topbar">
+    <h2>🚀 SkillSprint</h2>
+    <div>
       <a class="btn" href="/register">Register</a>
       <a class="btn" href="/login">Login</a>
     </div>
   </div>
+
+  <!-- Hero Section -->
+  <div class="container">
+    <div class="hero">
+      <div>
+        <h1>Build Your Career Roadmap Faster ✅</h1>
+        <p class="muted">
+          SkillSprint helps students create a structured weekly roadmap, manage daily tasks,
+          and track learning progress with a simple dashboard.
+        </p>
+
+        <div style="margin-top: 15px;">
+          <a class="btn" href="/register">Get Started Free</a>
+          <a class="btn secondary" href="/login">Already have an account?</a>
+        </div>
+
+        <p class="mini-note">📌 Tip: Create roadmap → add tasks → complete daily → track progress</p>
+      </div>
+
+      <div class="hero-card">
+        <h3>✅ What You Can Do</h3>
+        <ul>
+          <li>Generate Week-wise Roadmap</li>
+          <li>Create & Manage Tasks</li>
+          <li>Track Progress Percentage</li>
+          <li>Stay Consistent with Streak</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <h2 style="margin-top: 40px;">✨ Key Features</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🧭 Roadmap Generator</h3>
+        <p class="muted">
+          Choose your goal and generate a structured weekly roadmap for learning.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>✅ Task Manager</h3>
+        <p class="muted">
+          Add tasks with dates, mark them done, and stay organised daily.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>📊 Progress Tracker</h3>
+        <p class="muted">
+          See your completion percentage and improve consistency in learning.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🔐 Secure Login</h3>
+        <p class="muted">
+          Register and login securely. Your data stays saved in the database.
+        </p>
+      </div>
+    </div>
+
+    <!-- How it Works -->
+    <h2 style="margin-top: 40px;">🪜 How It Works</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Step 1</h3>
+        <p class="muted">Register / Login to SkillSprint</p>
+      </div>
+
+      <div class="card">
+        <h3>Step 2</h3>
+        <p class="muted">Create your roadmap based on goal</p>
+      </div>
+
+      <div class="card">
+        <h3>Step 3</h3>
+        <p class="muted">Add tasks and mark completion daily</p>
+      </div>
+
+      <div class="card">
+        <h3>Step 4</h3>
+        <p class="muted">Track your progress and improve</p>
+      </div>
+    </div>
+
+    <!-- Tech Stack Section -->
+    <h2 style="margin-top: 40px;">🛠 Tech Stack Used</h2>
+    <div class="card">
+      <p><b>Backend:</b> Python (Flask)</p>
+      <p><b>Frontend:</b> HTML, CSS</p>
+      <p><b>Database:</b> SQLite</p>
+      <p><b>Tools:</b> VS Code, GitHub</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>© 2026 SkillSprint | Final Year Python Web App Project</p>
+      <p class="muted">Made by Pornima Salve</p>
+    </div>
+  </div>
+
 </body>
 </html>
