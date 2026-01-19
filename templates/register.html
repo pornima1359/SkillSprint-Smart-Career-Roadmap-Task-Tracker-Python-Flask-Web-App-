@@ -5,8 +5,15 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
+<div class="topbar">
+  <h2>🚀 SkillSprint</h2>
+  <a class="btn secondary" href="/">Home</a>
+</div>
+
 <div class="container small">
-  <h2>📝 Register</h2>
+  <h1>Create Account</h1>
+  <p class="muted">Start building your roadmap today.</p>
 
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -16,14 +23,25 @@
     {% endif %}
   {% endwith %}
 
-  <form method="POST">
-    <input type="text" name="name" placeholder="Full Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button class="btn full" type="submit">Create Account</button>
-  </form>
+  <div class="card">
+    <form method="POST">
+      <label>Name</label>
+      <input name="name" required placeholder="Your name">
 
-  <p class="muted">Already have an account? <a href="/login">Login</a></p>
+      <label>Email</label>
+      <input name="email" required placeholder="example@gmail.com">
+
+      <label>Password</label>
+      <input type="password" name="password" required placeholder="Create password">
+
+      <button class="btn full" type="submit">Register</button>
+    </form>
+
+    <p class="muted center" style="margin-top:10px;">
+      Already have an account? <a href="/login">Login</a>
+    </p>
+  </div>
 </div>
+
 </body>
 </html>

@@ -5,8 +5,15 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
+<div class="topbar">
+  <h2>🚀 SkillSprint</h2>
+  <a class="btn secondary" href="/">Home</a>
+</div>
+
 <div class="container small">
-  <h2>🔐 Login</h2>
+  <h1>Login</h1>
+  <p class="muted">Welcome back 👋</p>
 
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -16,13 +23,22 @@
     {% endif %}
   {% endwith %}
 
-  <form method="POST">
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button class="btn full" type="submit">Login</button>
-  </form>
+  <div class="card">
+    <form method="POST">
+      <label>Email</label>
+      <input name="email" required placeholder="example@gmail.com">
 
-  <p class="muted">No account? <a href="/register">Register</a></p>
+      <label>Password</label>
+      <input type="password" name="password" required placeholder="Enter password">
+
+      <button class="btn full" type="submit">Login</button>
+    </form>
+
+    <p class="muted center" style="margin-top:10px;">
+      New user? <a href="/register">Create account</a>
+    </p>
+  </div>
 </div>
+
 </body>
 </html>

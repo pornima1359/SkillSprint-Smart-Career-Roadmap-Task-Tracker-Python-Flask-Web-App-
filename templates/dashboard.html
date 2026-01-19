@@ -2,44 +2,88 @@
 <html>
 <head>
   <title>Dashboard - SkillSprint</title>
-
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
+
 <div class="topbar">
   <h2>Welcome, {{session['user_name']}} 👋</h2>
-  <a class="btn" href="/logout">Logout</a>
+  <div class="nav">
+    <a class="btn secondary" href="/roadmaps">Roadmaps</a>
+    <a class="btn secondary" href="/tasks">Tasks</a>
+    <a class="btn secondary" href="/progress">Progress</a>
+    <a class="btn" href="/logout">Logout</a>
+  </div>
 </div>
 
 <div class="container">
   <h1>📊 Dashboard</h1>
+  <p class="muted">Your learning control panel. Stay consistent daily ✅</p>
+
+  <div class="card">
+    <h3>🔥 Overall Progress</h3>
+    <p><b>{{overall_percent}}%</b> Completed (Tasks + Roadmaps)</p>
+
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: {{overall_percent}}%;"></div>
+    </div>
+
+    <div class="chips">
+      <span class="chip">✅ Tasks Done: {{done_tasks}} / {{total_tasks}}</span>
+      <span class="chip">🧭 Roadmap Done: {{done_items}} / {{total_items}}</span>
+      <span class="chip">📌 Total Roadmaps: {{roadmap_count}}</span>
+    </div>
+  </div>
 
   <div class="grid">
     <div class="card">
       <h3>✅ Tasks</h3>
-      <p>Total: {{total_tasks}}</p>
-      <p>Done: {{completed_tasks}}</p>
+      <p>Total Tasks: <b>{{total_tasks}}</b></p>
+      <p>Completed: <b>{{done_tasks}}</b></p>
       <a class="btn" href="/tasks">Manage Tasks</a>
     </div>
 
     <div class="card">
-      <h3>🧭 Roadmap</h3>
-      <p>Total Weeks: {{total_roadmap}}</p>
-      <p>Completed: {{done_roadmap}}</p>
-      <a class="btn" href="/roadmap">View Roadmap</a>
+      <h3>🧭 Roadmaps</h3>
+      <p>Total Roadmap Items: <b>{{total_items}}</b></p>
+      <p>Completed: <b>{{done_items}}</b></p>
+      <a class="btn" href="/roadmaps">View Roadmaps</a>
     </div>
 
     <div class="card">
-      <h3>📈 Progress</h3>
-      <p>Track your daily growth</p>
-      <a class="btn" href="/progress">View Progress</a>
+      <h3>⚡ Quick Actions</h3>
+      <p class="muted">Build more plans & track better.</p>
+      <a class="btn full" href="/roadmap/create">➕ Create New Roadmap</a>
+      <a class="btn full secondary" href="/tasks">➕ Add New Task</a>
     </div>
   </div>
 
-  <div style="margin-top:20px;">
-    <a class="btn full" href="/create-roadmap">➕ Create / Reset Roadmap</a>
+  <div class="card">
+    <h3>🕒 Recent Tasks</h3>
+
+    {% if recent_tasks|length == 0 %}
+      <p class="muted">No tasks found. Add your first task now.</p>
+      <a class="btn" href="/tasks">Add Task</a>
+    {% else %}
+      {% for t in recent_tasks %}
+        <div class="row">
+          <div>
+            <b>{{t[0]}}</b> - {{t[1]}}
+            {% if t[2] == 1 %}
+              <span class="status Done">Done</span>
+            {% else %}
+              <span class="status Pending">Pending</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="footer">
+    <p>© 2026 SkillSprint | Final Year Project</p>
   </div>
 </div>
+
 </body>
 </html>

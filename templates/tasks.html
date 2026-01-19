@@ -5,13 +5,24 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
 <div class="topbar">
-  <a class="btn" href="/dashboard">⬅ Dashboard</a>
-  <a class="btn" href="/logout">Logout</a>
+  <h2>✅ Tasks</h2>
+  <div class="nav">
+    <a class="btn secondary" href="/dashboard">Dashboard</a>
+    <a class="btn secondary" href="/roadmaps">Roadmaps</a>
+    <a class="btn secondary" href="/progress">Progress</a>
+    <a class="btn" href="/logout">Logout</a>
+  </div>
 </div>
 
 <div class="container">
-  <h1>✅ Tasks</h1>
+  <h1>📌 Task Manager</h1>
+
+  <div class="card">
+    <h3>Today's Task Summary</h3>
+    <p><b>{{today_done}}</b> completed out of <b>{{today_total}}</b> tasks today ✅</p>
+  </div>
 
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -21,27 +32,48 @@
     {% endif %}
   {% endwith %}
 
-  <form method="POST" class="card">
-    <input type="date" name="date" required>
-    <input type="text" name="task" placeholder="Enter your task..." required>
-    <button class="btn full" type="submit">Add Task</button>
-  </form>
+  <div class="grid">
+    <div class="card">
+      <h3>➕ Add New Task</h3>
+      <form method="POST">
+        <label>Date</label>
+        <input type="date" name="date" required>
 
-  <div class="card">
-    {% for t in tasks %}
-      <div class="row">
-        <div>
-          <b>{{t[1]}}</b> - {{t[2]}}
-          {% if t[3] == 1 %}
-            <span class="status Done">Done</span>
-          {% else %}
-            <span class="status Pending">Pending</span>
-          {% endif %}
-        </div>
-        <a class="btn small" href="/task-toggle/{{t[0]}}">Toggle</a>
-      </div>
-    {% endfor %}
+        <label>Task</label>
+        <input type="text" name="task" placeholder="Example: Learn SQL joins" required>
+
+        <button class="btn full" type="submit">Add Task</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>📋 All Tasks</h3>
+
+      {% if tasks|length == 0 %}
+        <p class="muted">No tasks added yet.</p>
+      {% else %}
+        {% for t in tasks %}
+          <div class="row">
+            <div>
+              <b>{{t[1]}}</b> - {{t[2]}}
+              {% if t[3] == 1 %}
+                <span class="status Done">Done</span>
+              {% else %}
+                <span class="status Pending">Pending</span>
+              {% endif %}
+            </div>
+
+            <div style="display:flex; gap:8px;">
+              <a class="btn small" href="/task-toggle/{{t[0]}}">Toggle</a>
+              <a class="btn small danger" href="/task-delete/{{t[0]}}" onclick="return confirm('Delete task?')">Delete</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
   </div>
+
 </div>
+
 </body>
 </html>

@@ -5,23 +5,52 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
 <div class="topbar">
-  <a class="btn" href="/dashboard">⬅ Dashboard</a>
-  <a class="btn" href="/logout">Logout</a>
+  <h2>📊 Progress</h2>
+  <div class="nav">
+    <a class="btn secondary" href="/dashboard">Dashboard</a>
+    <a class="btn secondary" href="/roadmaps">Roadmaps</a>
+    <a class="btn secondary" href="/tasks">Tasks</a>
+    <a class="btn" href="/logout">Logout</a>
+  </div>
 </div>
 
 <div class="container">
-  <h1>📈 Progress</h1>
+  <h1>📈 Your Progress Report</h1>
+  <p class="muted">Task progress + Roadmap progress + Overall completion.</p>
 
   <div class="card">
-    <p><b>Total Tasks:</b> {{total}}</p>
-    <p><b>Completed:</b> {{done}}</p>
-    <h2>{{percent}}% Completed</h2>
-
+    <h3>🔥 Overall Progress</h3>
+    <p><b>{{overall_percent}}%</b> Completed</p>
     <div class="progress-bar">
-      <div class="progress-fill" style="width: {{percent}}%;"></div>
+      <div class="progress-fill" style="width: {{overall_percent}}%;"></div>
     </div>
   </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>✅ Task Progress</h3>
+      <p>Done: <b>{{done_tasks}}</b> / <b>{{total_tasks}}</b></p>
+      <p><b>{{task_percent}}%</b> Completed</p>
+
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: {{task_percent}}%;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🧭 Roadmap Progress</h3>
+      <p>Done: <b>{{done_items}}</b> / <b>{{total_items}}</b></p>
+      <p><b>{{roadmap_percent}}%</b> Completed</p>
+
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: {{roadmap_percent}}%;"></div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
 </body>
 </html>
